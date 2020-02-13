@@ -8,7 +8,10 @@
 import scrapy
 
 
-class RescrapItem(scrapy.Item):
+class Property(scrapy.Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
-    pass
+    price = scrapy.Field()
+    area = scrapy.Field()
+    bedrooms = scrapy.Field()
+    property_type = scrapy.Field()
