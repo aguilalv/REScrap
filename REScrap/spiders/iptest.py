@@ -5,7 +5,14 @@ import re
 class IptestSpider(scrapy.Spider):
     name = 'iptest'
     allowed_domains = ['atomurl.net']
-    start_urls = ['http://atomurl.net/myip/']
+
+    def __init__(self, iterations=None, *args, **kwargs):
+        super(IptestSpider, self).__init__(*args, **kwargs)
+        if iterations is not None:
+            for i in range(0,int(iterations)):
+                self.start_urls.append('http://atomurl.net/myip/')
+        else:
+            self.start_urls = ['http://atomurl.net/myip/']
 
     def parse(self, response):
         ip = response.css("tr input::attr(value)").get()
