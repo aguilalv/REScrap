@@ -18,6 +18,9 @@ NEWSPIDER_MODULE = 'REScrap.spiders'
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36'
 
+# scrapy-fake-useragent - Fallback user agent to avoid exceptions when source not online
+FAKEUSERAGENT_FALLBACK = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36' 
+
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = False
 
