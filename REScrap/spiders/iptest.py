@@ -20,6 +20,4 @@ class IptestSpider(scrapy.Spider):
         ua_text = response.css("table")[1].css("tr")[2].css("td::text").get()
         ua = re.search('Your browser User Agent: (.*)', ua_text, re.IGNORECASE).group(1)
 
-        print(f"------------> {ip}")
-        print(f"------------> {ua}")
-    
+        yield {'ip':ip,'user_agent':ua}
