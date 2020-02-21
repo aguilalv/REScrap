@@ -6,6 +6,8 @@ from scrapy.utils.project import get_project_settings
 
 import json
 
+## CAREFUL!!! - The test overwrites the pipelines configuration!! ##
+
 ### IS IT BETTER TO HAVE A FIXTURE RUN THE CRAWLING AND STORING IN A VARIABLE THE RESULTS THAT I AM INSTERESTED IN (e.g. User Agent) AND THEN USE TEST METHODS TO JUST CHECK THAT VARIABLE?
 
 ## Consider mocking requests or using betamax and looking at the request objec to avoid depending on the network
