@@ -13,5 +13,4 @@ class IdealistaSpider(scrapy.Spider):
     def parse(self, response):
         next_page = response.css('li.next a::attr(href)').get()
         if next_page is not None:
-            print(f'-----> {next_page}') 
             yield response.follow(next_page, callback=self.parse)
