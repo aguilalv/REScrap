@@ -14,7 +14,6 @@ from scrapy.http import HtmlResponse
 
 from REScrap.spiders.idealista import IdealistaSpider
 
-
 CASSETTE_LIBRARY_DIR = 'REScrap/tests/cassettes/'
 HEADERS = {
     'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.116 Safari/537.36',
@@ -25,9 +24,8 @@ HEADERS = {
     'Connection': 'keep-alive',
 } 
 
-
 @pytest.mark.usefixtures('betamax_session')
-def test_follows_to_next_page_when_exists(betamax_session):
+def test_creates_request_for_next_page_when_present(betamax_session):
     url = 'https://www.idealista.com/venta-viviendas/benicasimbenicassim/heliopolis-eurosol/'
     spider = IdealistaSpider()
 
@@ -38,6 +36,21 @@ def test_follows_to_next_page_when_exists(betamax_session):
     for result in results:
         if isinstance(result,Request):
             assert result.url == url+'pagina-2.htm'
+            return
+
+    pytest.fail('Did not return request to next page')
+
+@pytest.mark.usefixtures('betamax_session')
+def test_uses_parse_for_next_page(betamax_session):
+    url = 'https://www.idealista.com/venta-viviendas/benicasimbenicassim/heliopolis-eurosol/'
+    spider = IdealistaSpider()
+
+    response = betamax_session.get(url, headers=HEADERS)
+    scrapy_response = HtmlResponse(body=response.content, url=url)
+    results = spider.parse(scrapy_response)
+
+    for result in results:
+        if isinstance(result,Request):
             assert result.callback == spider.parse 
             return
 
